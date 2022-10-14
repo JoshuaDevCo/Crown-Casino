@@ -85,7 +85,7 @@ const ModalLogin = () => {
         <div>
           <form>
             <div className="flex flex-col">
-              <label className="font-mont text-bold text-sm sm:text-md">2FA code</label>
+              <label className="font-mont text-bold text-sm sm:text-md">Código do E-mail:</label>
               <input
                 type="text"
                 className="border-2 border-slate-500 rounded-md p-2 bg-slate-800 md:w-96"

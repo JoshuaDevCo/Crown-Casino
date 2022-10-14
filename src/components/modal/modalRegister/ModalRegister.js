@@ -17,6 +17,7 @@ const ModalRegister = () => {
       email: "",
       password: "",
       passwordConfirm: "",
+      referenceCode: "",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("O nickname é obrigatório"),
@@ -26,6 +27,7 @@ const ModalRegister = () => {
         "Sua senha não é forte  o suficiente"
       ),
       passwordConfirm: Yup.string().oneOf([Yup.ref("password"), null], "As senhas não são iguais"),
+      referenceCode: Yup.string()
     }),
   });
 
@@ -37,8 +39,9 @@ const ModalRegister = () => {
     const nickName = formik.values.nickname;
     const email = formik.values.email;
     const password = formik.values.password;
+    const referenceCode = formik.values.referenceCode;
 
-    doRegister(nickName, email, password)
+    doRegister(nickName, email, password, referenceCode)
       .then(response => {
         if (response) {
           setSuccess('Cadastro realizado com sucesso!');
@@ -116,6 +119,20 @@ const ModalRegister = () => {
               value={formik.values.passwordConfirm}
             />
             {formik.touched.passwordConfirm && formik.errors.passwordConfirm ? <div className="text-slate-800 font-semibold text-sm font-mont mt-2 shadow rounded bg-red-400 box-content p-2">{formik.errors.passwordConfirm}</div> : null}
+          </div>
+          <div className="flex flex-col mt-2">
+            <label className="font-mont text-bold text-sm sm:text-md" htmlFor="name">Código de Referência</label>
+            <input
+              className="border-2 border-slate-500 rounded-md p-2 bg-slate-800"
+              type="text"
+              name="referenceCode"
+              id="referenceCode"
+              placeholder="referenceCode"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.referenceCode}
+            />
+            {formik.touched.referenceCode && formik.errors.referenceCode ? <div className="text-slate-800 font-semibold text-sm font-mont mt-2 shadow rounded bg-red-400 box-content p-2">{formik.errors.passwordConfirm}</div> : null}
           </div>
           <div className="items-center justify-center">
             <button className="bg-green-700 hover:bg-green-600 text-slate-50 font-bold py-2 px-4 rounded mt-2 mx-auto w-full md:w-96" type="submit" onClick={(e) => onClickSubmit(e)}>Registrar</button>

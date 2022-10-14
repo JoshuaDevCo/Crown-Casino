@@ -1,8 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { betLimbo } from "../../../services/games/limboService";
+import BallanceContext from "../../../context/ballanceContext";
 
 function LimboGame() {
+
+  const { ballance, setBallance } = useContext(BallanceContext);
 
   const currentBallance = 'ballanceBRL';
   const [limboPoint, setLimboPoint] = useState(0);

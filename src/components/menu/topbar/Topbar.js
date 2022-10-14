@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { doLogout } from "./../../../services/LoginService";
 import DropdownTopBar from "./../dropdownTopBar";
 import GG from '../../../assets/imgs/GG.png';
 import Modal from '../../modal/modalBase/ModalBase';
@@ -19,20 +18,6 @@ function Topbar() {
   const [isModalLoginOpen, setIsModalLoginOpen] = useState(false);
   const [isModalRegisterOpen, setIsModalRegisterOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  function cleanAndRedirect() {
-    localStorage.removeItem('token');
-    navigate('/');
-  }
-
-  function onLogoutClick(event) {
-    doLogout()
-      .then(response => cleanAndRedirect())
-      .catch(error => {
-        console.error(error);
-        cleanAndRedirect();
-      })
-  }
 
   const token = localStorage.getItem('token')
 
@@ -68,7 +53,7 @@ function Topbar() {
             :
             <div className="flex">
               <DropdownTopBar />
-              <button className="hidden md:flex text-sm text-white p-2 rounded-lg mt-2 ml-1  shadow shadow-red-400 hover:bg-red-500 mr-2" onClick={onLogoutClick}>Logout</button>
+
             </div>}
 
         </div>
