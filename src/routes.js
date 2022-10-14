@@ -1,6 +1,7 @@
 /** Importações Padrão */
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import ballanceContext from './context/ballanceContext';
 
 /** Importações das rotas */
 import App from "./App";
@@ -17,21 +18,25 @@ import Limbo from "./private/casinoGames/limbo/Limbo";
 
 
 function Routing() {
-
+  const [ballance, setBallance] = useState('10000')
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<PrivateRoutes />}>
-          <Route path='settings' element={<SettingsPage />} />
-          <Route path='security' element={<Security />} />
-          <Route path='crash' element={<Crash />} />
-          <Route path='limbo' element={<Limbo />} />
-          <Route path='transactions' element={<Transactions />} />
-        </Route>
-        <Route path='/' element={<Home />} exact />
-      </Routes>
-    </BrowserRouter>
+      <ballanceContext.Provider value={{ ballance, setBallance }}>
+        <Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route path='settings' element={<SettingsPage />} />
+            <Route path='security' element={<Security />} />
+            <Route path='crash' element={<Crash />} />
+            <Route path='limbo' element={<Limbo />} />
+            <Route path='transactions' element={<Transactions />} />
+
+          </Route>
+          <Route path='/' element={<Home />} exact />
+        </Routes>
+      </ballanceContext.Provider>
+    </BrowserRouter >
+
   )
 
 }

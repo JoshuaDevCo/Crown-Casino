@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"
 import WalletButton from "./walletButton";
-import { doLogout } from "./../../services/LoginService";
 import DropdownTopBar from "./dropdownTopBar";
 import GG from '../../assets/imgs/GG.png';
 
@@ -10,21 +9,6 @@ function Topbar() {
 
   const navigate = useNavigate();
 
-
-
-  function cleanAndRedirect() {
-    localStorage.removeItem('token');
-    navigate('/');
-  }
-
-  function onLogoutClick(event) {
-    doLogout()
-      .then(response => cleanAndRedirect())
-      .catch(error => {
-        console.error(error);
-        cleanAndRedirect();
-      })
-  }
 
   const token = localStorage.getItem('token')
 
@@ -51,7 +35,6 @@ function Topbar() {
             :
             <div className="flex">
               <DropdownTopBar />
-              <button className="text-sm text-white p-3 rounded-lg mt-2 ml-1  shadow shadow-red-400 hover:bg-red-500 mr-2" onClick={onLogoutClick}>Logout</button>
             </div>}
 
         </div>
